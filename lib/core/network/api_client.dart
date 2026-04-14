@@ -10,8 +10,20 @@ class ApiClient {
   final Dio _dio;
 
   Future<String> healthCheck() async {
-    final Response<dynamic> response = await _dio.get<dynamic>('/todos/1');
-    return response.statusCode == 200 ? 'ok' : 'failed';
+    try {
+      final Response<dynamic> response = await _dio.get<dynamic>(
+        '/todos/1',
+        options: Options(validateStatus: (_) => true),
+      );
+
+      final int status = response.statusCode ?? 0;
+      if (status >= 200 && status < 300) {
+        return 'ok';
+      }
+      return 'http-$status';
+    } on DioException {
+      return 'network-error';
+    }
   }
 }
 

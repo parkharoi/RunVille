@@ -48,3 +48,7 @@ app.*.map.json
 .env
 .env.*
 !.env.example
+
+# Flutter environment files
+assets/env/.env.dev
+assets/env/.env.prod
