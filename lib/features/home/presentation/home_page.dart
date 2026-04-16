@@ -1,20 +1,17 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:run_ville/core/config/env.dart';
-import 'package:run_ville/core/network/api_client.dart';
-
-final Provider<Dio> dioProvider = Provider<Dio>((ref) {
-  return buildDioClient();
-});
-
-final Provider<ApiClient> apiClientProvider = Provider<ApiClient>((ref) {
-  return ApiClient(ref.watch(dioProvider));
-});
 
 final healthCheckProvider = FutureProvider.autoDispose<String>((ref) async {
-  final ApiClient apiClient = ref.watch(apiClientProvider);
-  return apiClient.healthCheck();
+  try {
+    await Supabase.instance.client.from('runs').select('id').limit(1);
+    return 'ok';
+  } on PostgrestException catch (error) {
+    return 'query-error-${error.code ?? 'unknown'}';
+  } catch (_) {
+    return 'network-error';
+  }
 });
 
 class HomePage extends ConsumerWidget {
@@ -32,10 +29,8 @@ class HomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text('Flavor: ${Env.flavor}'),
-            const SizedBox(height: 8),
-            Text('API Base URL: ${Env.apiBaseUrl}'),
             const SizedBox(height: 24),
-            const Text('Backend health check'),
+            const Text('Supabase health check'),
             const SizedBox(height: 8),
             healthState.when(
               data: (value) => Text('Status: $value'),

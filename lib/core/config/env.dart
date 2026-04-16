@@ -5,7 +5,8 @@ final class Env {
   Env._();
 
   static const String _flavorKey = 'FLAVOR';
-  static const String _apiBaseUrlKey = 'API_BASE_URL';
+  static const String _supabaseUrlKey = 'SUPABASE_URL';
+  static const String _supabaseAnonKeyKey = 'SUPABASE_ANON_KEY';
 
   static Future<void> initialize() async {
     const String flavor = String.fromEnvironment(
@@ -27,10 +28,10 @@ final class Env {
   static String get flavor =>
       const String.fromEnvironment(_flavorKey, defaultValue: 'dev');
 
-  static String get apiBaseUrl => _safeRead(
-    _apiBaseUrlKey,
-    fallback: 'https://jsonplaceholder.typicode.com',
-  );
+  static String get supabaseUrl => _safeRead(_supabaseUrlKey, fallback: '');
+
+  static String get supabaseAnonKey =>
+      _safeRead(_supabaseAnonKeyKey, fallback: '');
 
   static String _safeRead(String key, {required String fallback}) {
     try {
