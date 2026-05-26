@@ -7,6 +7,7 @@ final class Env {
   static const String _flavorKey = 'FLAVOR';
   static const String _supabaseUrlKey = 'SUPABASE_URL';
   static const String _supabaseAnonKeyKey = 'SUPABASE_ANON_KEY';
+  static const String _vworldApiKeyKey = 'VWORLD_API_KEY';
 
   static Future<void> initialize() async {
     const String flavor = String.fromEnvironment(
@@ -32,6 +33,19 @@ final class Env {
 
   static String get supabaseAnonKey =>
       _safeRead(_supabaseAnonKeyKey, fallback: '');
+
+  static String get vworldApiKey => _safeRead(_vworldApiKeyKey, fallback: '');
+
+  static bool get hasVworldApiKey => vworldApiKey.isNotEmpty;
+
+  static String get mapTileUrlTemplate {
+    if (hasVworldApiKey) {
+      return 'https://api.vworld.kr/req/wmts/1.0.0/$vworldApiKey/Base/{z}/{y}/{x}.png';
+    }
+    return 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+  }
+
+  static String get mapUserAgentPackageName => 'com.runville.app';
 
   static String _safeRead(String key, {required String fallback}) {
     try {
