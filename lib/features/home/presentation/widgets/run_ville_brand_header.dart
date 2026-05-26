@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:run_ville/features/user/presentation/user_page.dart';
 
 class RunVilleBrandHeader extends StatelessWidget {
   const RunVilleBrandHeader({super.key, this.compact = false});
@@ -45,10 +46,19 @@ class RunVilleBrandHeader extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        CircleAvatar(
-          radius: avatarRadius,
-          backgroundColor: Colors.white,
-          child: const Icon(Icons.person, color: Color(0xFF404040)),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext ctx) => const UserPage(),
+              ),
+            );
+          },
+          child: CircleAvatar(
+            radius: avatarRadius,
+            backgroundColor: Colors.white,
+            child: const Icon(Icons.person, color: Color(0xFF404040)),
+          ),
         ),
       ],
     );
