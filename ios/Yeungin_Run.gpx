@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Xcode">
+    <wpt lat="35.8921" lon="128.6224">
+        <name>Yeungjin Univ Start</name>
+    </wpt>
+    <trk>
+        <name>Campus Run</name>
+        <trkseg>
+            <trkpt lat="35.8921" lon="128.6224"><time>2026-05-14T12:39:00Z</time></trkpt>
+            <trkpt lat="35.8930" lon="128.6230"><time>2026-05-14T12:39:15Z</time></trkpt>
+            <trkpt lat="35.8935" lon="128.6245"><time>2026-05-14T12:39:30Z</time></trkpt>
+            <trkpt lat="35.8925" lon="128.6255"><time>2026-05-14T12:39:45Z</time></trkpt>
+            <trkpt lat="35.8915" lon="128.6235"><time>2026-05-14T12:40:00Z</time></trkpt>
+        </trkseg>
+    </trk>
+</gpx>
