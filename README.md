@@ -66,6 +66,11 @@ flutter run --dart-define=FLAVOR=prod
 - `assets/env/.env.dev`
 - `assets/env/.env.prod`
 
+지도(한국어 라벨):
+
+- `Env`는 `VWORLD_API_KEY`가 설정되어 있으면 vWorld 타일(한국어 라벨)을 사용하고, 비어있으면 OpenStreetMap(영문 라벨)로 폴백합니다.
+- 따라서 한국어 지도를 원하면 `assets/env/.env.dev` 또는 `assets/env/.env.prod`에 `VWORLD_API_KEY`를 채워주세요.
+
 ## 아이폰 실행
 
 시뮬레이터 켜기:
